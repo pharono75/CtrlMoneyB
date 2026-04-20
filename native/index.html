@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CtrlMoney - Управление финансами</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+    <div id="root">
+        <!-- LANDING PAGE -->
+        <div id="landing-page" class="page active">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="logo-placeholder"></div>
+                    
+                    <ul class="nav-links">
+                        <li><a href="#functions">Функции</a></li>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#prices">Цены</a></li>
+                    </ul>
+
+                    <div class="login-wrapper">
+                        <button class="login-btn" onclick="navigateTo('/login')">
+                            <svg class="login-icon" width="18" height="18" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1_34)">
+                                    <path d="M7 10C9.76142 10 12 7.76142 12 5C12 2.23858 9.76142 0 7 0C4.23858 0 2 2.23858 2 5C2 7.76142 4.23858 10 7 10Z" fill="currentColor"/>
+                                    <path d="M7 10C3.81934 10 1.13414 12.1214 0.282076 15.0264C-0.0288016 16.0863 0.895431 17 2 17H12C13.1046 17 14.0288 16.0863 13.7179 15.0264C12.8659 12.1214 10.1807 10 7 10Z" fill="currentColor"/>
+                                </g>
+                            </svg>
+                            Войти
+                        </button>
+                    </div>
+                </nav>
+
+                <section class="hero">
+                    <div class="bg-wrapper">
+                        <svg class="bg-svg" viewBox="0 0 1085 878" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_f_1_14)">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M411.835 152.119C473.723 153.34 539.997 121.099 593.404 143.459C646.698 165.771 653.144 218.438 671.068 260.65C686.846 297.806 690.872 335.032 691.238 373.858C691.666 419.358 711.221 470.372 673.388 506.988C635.356 543.797 563.78 556.515 499.82 559.119C442.424 561.455 394.575 532.813 339.702 520.572C286.073 508.608 217.012 518.776 180.988 487.992C144.934 457.182 176.947 409.7 164.2 370.597C149.691 326.087 90.0279 288.936 101.442 243.969C113.228 197.533 162.642 154.239 223.704 136.169C283.248 118.549 347.403 150.849 411.835 152.119Z" fill="#767D8F"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M716.909 342.824C772.608 331.843 836.088 354.575 878.011 381.855C918.007 407.88 916.723 450.376 936.328 485.602C952.585 514.811 992.33 541.179 983.764 571.866C975.133 602.788 908.442 611.42 892.932 641.07C871.932 681.214 926.567 736.637 881.941 766.514C841.943 793.292 772.646 763.209 716.909 758.914C667.461 755.103 609.482 765.023 572.12 742.638C534.306 719.982 555.115 675.055 528.408 645.976C500.181 615.242 430.518 606.599 415.28 571.866C399.94 536.903 413.174 493.483 449.826 466.862C486.616 440.142 557.517 456.922 601.956 436.284C652.112 412.991 658.594 354.322 716.909 342.824Z" fill="#767D8F"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M428.551 400.696C478.909 407.776 510.41 440.773 543.419 467.288C568.433 487.381 578.562 512.551 596.675 535.747C613.96 557.883 642.519 576.223 647.805 600.966C653.417 627.234 649.374 656.074 627.061 677.971C605.101 699.522 562.52 704.637 528.857 717.697C495.192 730.759 466.054 748.112 428.551 754.989C383.355 763.276 330.718 777.756 290.724 761.362C250.564 744.9 262.055 701.946 235.498 675.855C205.784 646.661 132.655 636.161 127.466 600.966C122.421 566.745 185.432 546.353 212.077 516.992C237.937 488.496 243.319 451.393 282.115 430.551C322.646 408.777 377.758 393.555 428.551 400.696Z" fill="#767D8F"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M756.006 101.781C806.364 108.861 837.866 141.857 870.874 168.373C895.888 188.466 906.017 213.636 924.131 236.832C941.416 258.967 969.974 277.307 975.261 302.05C980.873 328.319 976.829 357.159 954.516 379.056C932.556 400.606 889.975 405.721 856.312 418.782C822.647 431.843 793.51 449.197 756.006 456.073C710.81 464.361 658.174 478.841 618.18 462.447C578.019 445.984 589.51 403.03 562.954 376.939C533.24 347.746 460.11 337.245 454.922 302.05C449.876 267.829 512.888 247.437 539.532 218.076C565.392 189.58 570.774 152.478 609.571 131.635C650.101 109.861 705.213 94.6396 756.006 101.781Z" fill="#767D8F"/>
+                            </g>
+                            <defs>
+                                <filter id="filter0_f_1_14" x="0" y="0" width="1084.96" height="877.493" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                    <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_1_14"/>
+                                </filter>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <h1>CtrlMoney</h1>
+                    <p>Управляйте своими финансами легко и эффективно с CtrlMoney</p>
+                    <button class="cta-btn" onclick="navigateTo('/register')">Начать сейчас</button>
+                </section>
+            </div>
+        </div>
+
+        <!-- LOGIN PAGE -->
+        <div id="login-page" class="page">
+            <div class="login-container">
+                <div class="login-content">
+                    <svg class="register-bg" viewBox="0 0 1085 878" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_f_1_14)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M411.835 152.119C473.723 153.34 539.997 121.099 593.404 143.459C646.698 165.771 653.144 218.438 671.068 260.65C686.846 297.806 690.872 335.032 691.238 373.858C691.666 419.358 711.221 470.372 673.388 506.988C635.356 543.797 563.78 556.515 499.82 559.119C442.424 561.455 394.575 532.813 339.702 520.572C286.073 508.608 217.012 518.776 180.988 487.992C144.934 457.182 176.947 409.7 164.2 370.597C149.691 326.087 90.0279 288.936 101.442 243.969C113.228 197.533 162.642 154.239 223.704 136.169C283.248 118.549 347.403 150.849 411.835 152.119Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M716.909 342.824C772.608 331.843 836.088 354.575 878.011 381.855C918.007 407.88 916.723 450.376 936.328 485.602C952.585 514.811 992.33 541.179 983.764 571.866C975.133 602.788 908.442 611.42 892.932 641.07C871.932 681.214 926.567 736.637 881.941 766.514C841.943 793.292 772.646 763.209 716.909 758.914C667.461 755.103 609.482 765.023 572.12 742.638C534.306 719.982 555.115 675.055 528.408 645.976C500.181 615.242 430.518 606.599 415.28 571.866C399.94 536.903 413.174 493.483 449.826 466.862C486.616 440.142 557.517 456.922 601.956 436.284C652.112 412.991 658.594 354.322 716.909 342.824Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M428.551 400.696C478.909 407.776 510.41 440.773 543.419 467.288C568.433 487.381 578.562 512.551 596.675 535.747C613.96 557.883 642.519 576.223 647.805 600.966C653.417 627.234 649.374 656.074 627.061 677.971C605.101 699.522 562.52 704.637 528.857 717.697C495.192 730.759 466.054 748.112 428.551 754.989C383.355 763.276 330.718 777.756 290.724 761.362C250.564 744.9 262.055 701.946 235.498 675.855C205.784 646.661 132.655 636.161 127.466 600.966C122.421 566.745 185.432 546.353 212.077 516.992C237.937 488.496 243.319 451.393 282.115 430.551C322.646 408.777 377.758 393.555 428.551 400.696Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M756.006 101.781C806.364 108.861 837.866 141.857 870.874 168.373C895.888 188.466 906.017 213.636 924.131 236.832C941.416 258.967 969.974 277.307 975.261 302.05C980.873 328.319 976.829 357.159 954.516 379.056C932.556 400.606 889.975 405.721 856.312 418.782C822.647 431.843 793.51 449.197 756.006 456.073C710.81 464.361 658.174 478.841 618.18 462.447C578.019 445.984 589.51 403.03 562.954 376.939C533.24 347.746 460.11 337.245 454.922 302.05C449.876 267.829 512.888 247.437 539.532 218.076C565.392 189.58 570.774 152.478 609.571 131.635C650.101 109.861 705.213 94.6396 756.006 101.781Z" fill="#767D8F"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_f_1_14" x="0" y="0" width="1084.96" height="877.493" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_1_14"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                    
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <h1 class="card-title">CtrlMoney</h1>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="email-input-wrapper">
+                                <div class="email-icon-container" id="emailIconContainer"></div>
+                                <input 
+                                    id="loginEmail" 
+                                    type="email" 
+                                    placeholder="Рабочая почта" 
+                                    class="form-input"
+                                    autocomplete="off"
+                                >
+                                <div id="emailSuggestions" class="email-suggestions"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input 
+                                id="loginPassword" 
+                                type="password" 
+                                placeholder="Пароль" 
+                                class="form-input"
+                                autocomplete="off"
+                            >
+                        </div>
+
+                        <button id="loginBtn" class="primary-button" onclick="handleLogin()">Войти</button>
+
+                        <div class="form-footer">
+                            <p>Нет аккаунта? <a href="javascript:void(0)" onclick="navigateTo('/register')">Зарегистрироваться</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER PAGE -->
+        <div id="register-page" class="page">
+            <div class="register-container">
+                <div class="register-content">
+                    <svg class="register-bg" viewBox="0 0 1085 878" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_f_1_14)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M411.835 152.119C473.723 153.34 539.997 121.099 593.404 143.459C646.698 165.771 653.144 218.438 671.068 260.65C686.846 297.806 690.872 335.032 691.238 373.858C691.666 419.358 711.221 470.372 673.388 506.988C635.356 543.797 563.78 556.515 499.82 559.119C442.424 561.455 394.575 532.813 339.702 520.572C286.073 508.608 217.012 518.776 180.988 487.992C144.934 457.182 176.947 409.7 164.2 370.597C149.691 326.087 90.0279 288.936 101.442 243.969C113.228 197.533 162.642 154.239 223.704 136.169C283.248 118.549 347.403 150.849 411.835 152.119Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M716.909 342.824C772.608 331.843 836.088 354.575 878.011 381.855C918.007 407.88 916.723 450.376 936.328 485.602C952.585 514.811 992.33 541.179 983.764 571.866C975.133 602.788 908.442 611.42 892.932 641.07C871.932 681.214 926.567 736.637 881.941 766.514C841.943 793.292 772.646 763.209 716.909 758.914C667.461 755.103 609.482 765.023 572.12 742.638C534.306 719.982 555.115 675.055 528.408 645.976C500.181 615.242 430.518 606.599 415.28 571.866C399.94 536.903 413.174 493.483 449.826 466.862C486.616 440.142 557.517 456.922 601.956 436.284C652.112 412.991 658.594 354.322 716.909 342.824Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M428.551 400.696C478.909 407.776 510.41 440.773 543.419 467.288C568.433 487.381 578.562 512.551 596.675 535.747C613.96 557.883 642.519 576.223 647.805 600.966C653.417 627.234 649.374 656.074 627.061 677.971C605.101 699.522 562.52 704.637 528.857 717.697C495.192 730.759 466.054 748.112 428.551 754.989C383.355 763.276 330.718 777.756 290.724 761.362C250.564 744.9 262.055 701.946 235.498 675.855C205.784 646.661 132.655 636.161 127.466 600.966C122.421 566.745 185.432 546.353 212.077 516.992C237.937 488.496 243.319 451.393 282.115 430.551C322.646 408.777 377.758 393.555 428.551 400.696Z" fill="#767D8F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M756.006 101.781C806.364 108.861 837.866 141.857 870.874 168.373C895.888 188.466 906.017 213.636 924.131 236.832C941.416 258.967 969.974 277.307 975.261 302.05C980.873 328.319 976.829 357.159 954.516 379.056C932.556 400.606 889.975 405.721 856.312 418.782C822.647 431.843 793.51 449.197 756.006 456.073C710.81 464.361 658.174 478.841 618.18 462.447C578.019 445.984 589.51 403.03 562.954 376.939C533.24 347.746 460.11 337.245 454.922 302.05C449.876 267.829 512.888 247.437 539.532 218.076C565.392 189.58 570.774 152.478 609.571 131.635C650.101 109.861 705.213 94.6396 756.006 101.781Z" fill="#767D8F"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_f_1_14" x="0" y="0" width="1084.96" height="877.493" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                                <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_1_14"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                    
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <h1 class="card-title">CtrlMoney</h1>
+                        </div>
+
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progress1"></div>
+                            <div class="progress-bar" id="progress2"></div>
+                            <div class="progress-bar" id="progress3"></div>
+                        </div>
+
+                        <div id="registerForm">
+                            <!-- Step 1 -->
+                            <div class="form-step active" data-step="1">
+                                <div class="form-group">
+                                    <input id="companyName" type="text" placeholder="Название компании" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <div class="email-input-wrapper">
+                                        <div class="email-icon-container" id="regEmailIconContainer"></div>
+                                        <input id="registerEmail" type="email" placeholder="Рабочая почта" class="form-input" autocomplete="off">
+                                        <div id="registerEmailSuggestions" class="email-suggestions"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="phone" type="tel" placeholder="+7 " class="form-input" maxlength="18">
+                                </div>
+                                <button type="button" class="primary-button" onclick="registerNextStep(1)">Далее</button>
+                                <div class="form-footer">
+                                    <p>Уже есть аккаунт? <a href="javascript:void(0)" onclick="navigateTo('/login')">Войти</a></p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="form-step" data-step="2">
+                                <div class="form-group">
+                                    <input id="inn" type="text" placeholder="ИНН (10 цифр)" class="form-input" maxlength="10">
+                                </div>
+                                <div class="form-group" id="innRegionDiv" style="display:none;">
+                                    <p class="region-badge" id="innRegionText"></p>
+                                </div>
+                                <div class="form-group">
+                                    <select id="employeeCount" class="form-input">
+                                        <option value="">Количество сотрудников</option>
+                                        <option value="1-10">1-10</option>
+                                        <option value="11-50">11-50</option>
+                                        <option value="51-200">51-200</option>
+                                        <option value="201-500">201-500</option>
+                                        <option value="500+">500+</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="use1C" class="form-input">
+                                        <option value="">Используете ли вы 1С?</option>
+                                        <option value="Да">Да</option>
+                                        <option value="Нет">Нет</option>
+                                        <option value="Планирую">Планирую</option>
+                                    </select>
+                                </div>
+                                <div class="step-navigation">
+                                    <button type="button" class="secondary-button" onclick="registerPrevStep(2)">Назад</button>
+                                    <button type="button" class="primary-button" onclick="registerNextStep(2)">Далее</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="form-step" data-step="3">
+                                <div class="form-group">
+                                    <input id="fullName" type="text" placeholder="Ф.И.О" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <select id="position" class="form-input">
+                                        <option value="">Должность</option>
+                                        <option value="Директор">Директор</option>
+                                        <option value="Бухгалтер">Бухгалтер</option>
+                                        <option value="Менеджер">Менеджер</option>
+                                        <option value="Специалист">Специалист</option>
+                                        <option value="Другое">Другое</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="password-input-wrapper">
+                                        <input id="registerPassword" type="password" placeholder="Пароль" class="form-input" autocomplete="off">
+                                        <button type="button" class="eye-button" onclick="togglePasswordVisibility('registerPassword')">
+                                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="password-input-wrapper">
+                                        <input id="confirmPassword" type="password" placeholder="Подтвердите пароль" class="form-input" autocomplete="off">
+                                        <button type="button" class="eye-button" onclick="togglePasswordVisibility('confirmPassword')">
+                                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="step-navigation">
+                                    <button type="button" class="secondary-button" onclick="registerPrevStep(3)">Назад</button>
+                                    <button id="submitRegisterBtn" type="button" class="primary-button" onclick="handleRegister()">Зарегистрироваться</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD PAGE -->
+        <div id="dashboard-page" class="page">
+            <div class="dashboard-container">
+                <h1>Добро пожаловать в CtrlMoney</h1>
+                <p>Это закрытая зона для авторизованных пользователей</p>
+                <button class="primary-button" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
