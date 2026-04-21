@@ -17,76 +17,76 @@ const Sidebar = () => {
     }
 
     return (
-       <aside className="w-28 bg-white/40 backdrop-blur-xl rounded-[32px] border border-white/40 flex flex-col items-center py-8 shadow-xl">
+       <aside className="w-[calc(var(--index)*3.7)] h-fit sticky top-[calc(var(--index)*1)] bg-white/40 backdrop-blur-xl rounded-[calc(var(--index)*1.1)] border border-white/40 flex flex-col items-center py-[calc(var(--index)*1)] shadow-xl">
             {/* Верхние иконки с подписями */}
-            <nav className="flex flex-col gap-6 flex-1">
+            <nav className="flex flex-col gap-[calc(var(--index)*0.8)]">
                 {/* Главная */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Main className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Main className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Главная</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Главная</span>
                 </button>
 
                 {/* Финансы */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Fin className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Fin className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Финансы</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Финансы</span>
                 </button>
 
                 {/* Документы */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Doc className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Doc className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Документы</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Документы</span>
                 </button>
 
                 {/* Персонал */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Employee className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Employee className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Персонал</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Персонал</span>
                 </button>
 
                 {/* Профиль */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Profile className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Profile className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Профиль</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Профиль</span>
                 </button>
             </nav>
 
-            <div className="w-8 h-1 bg-primary-icon/50 my-4 rounded-full" />
+            <div className="w-[calc(var(--index)*1.1)] h-[calc(var(--index)*0.1)] bg-primary-icon/50 my-[calc(var(--index)*0.5)] rounded-full" />
 
             {/* Нижний блок */}
-            <div className="flex flex-col items-center gap-6 mt-auto">
+            <div className="flex flex-col items-center gap-[calc(var(--index)*0.8)]">
                 {/* Настройки */}
-                <button className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-xl hover:bg-white/30 transition-colors">
-                    <Settings className="w-7 h-7 text-primary-icon group-hover:text-primary transition-colors" />
+                <button className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group">
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-white/30 transition-colors">
+                    <Settings className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium">Настройки</span>
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium">Настройки</span>
                 </button>
 
                 {/* Выход */}
                 <button 
                 onClick={handleLogout} 
-                className="flex flex-col items-center gap-1 group"
+                className="flex flex-col items-center gap-[calc(var(--index)*0.15)] group"
                 >
-                <div className="p-2 rounded-xl hover:bg-red-50/30 transition-colors">
-                    <Logout className="w-7 h-7 text-primary-icon group-hover:text-red-500 transition-colors" />
+                <div className="p-[calc(var(--index)*0.25)] rounded-[calc(var(--index)*0.4)] hover:bg-red-50/30 transition-colors">
+                    <Logout className="w-[calc(var(--index)*0.9)] h-[calc(var(--index)*0.9)] text-primary-icon group-hover:text-red-500 transition-colors" />
                 </div>
-                <span className="text-secondary text-sm font-medium group-hover:text-red-500 transition-colors">
+                <span className="text-secondary text-[calc(var(--index)*0.45)] font-medium group-hover:text-red-500 transition-colors">
                     Выход
                 </span>
                 </button>
             </div>
-        </aside>
+       </aside>
     );
 }
 
