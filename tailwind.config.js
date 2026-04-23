@@ -18,6 +18,11 @@ export default {
       backgroundImage: {
         'gradient-to-br': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
       },
+
+      fontFamily: {
+        // Переопределяем стандартный шрифт Tailwind на Poppins
+        sans: ['Poppins', 'sans-serif'],
+      },
       
       // 1. УНИВЕРСАЛЬНЫЕ РАЗМЕРЫ (Отступы, Ширина, Высота: p-, m-, gap-, w-, h-)
       spacing: {

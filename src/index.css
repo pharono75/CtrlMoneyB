@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,4 +6,9 @@
 
 :root {
   --index: calc(1vw + 1vh);
+}
+
+/* Жестко задаем шрифт для всей страницы */
+body {
+  font-family: 'Poppins', sans-serif;
 }

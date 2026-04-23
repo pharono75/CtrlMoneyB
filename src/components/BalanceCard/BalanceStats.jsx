@@ -1,44 +1,60 @@
 import React from 'react';
-import ArrowUp from '../../assets/arrowup.svg?react';
-import ArrowDown from '../../assets/arrowdown.svg?react';
+import { useFinance } from '../../context/FinanceContext';
 
 const BalanceStats = () => {
+  // 1. Достаем переменные именно за выбранный период!
+  const { periodIncome, periodExpense } = useFinance();
+  
+  // 2. Считаем прибыль на основе этих переменных
+  const profit = periodIncome - periodExpense;
+  const profitPercent = periodIncome > 0 ? Math.max(0, Math.round((profit / periodIncome) * 100)) : 0;
+
+  const formatMoney = (amount) => amount.toLocaleString('ru-RU') + '₽';
+
   return (
-    <div className="flex flex-col gap-idx-2 w-full">
-      
-      {/* Ряд Доход / Расход */}
-      <div className="grid grid-cols-2 gap-idx-2">
+    <div className="flex flex-col gap-[calc(var(--index)*0.5)] w-full">
+      <div className="flex gap-[calc(var(--index)*0.5)]">
         {/* Карточка Дохода */}
-        <div className="bg-white/50 backdrop-blur-md rounded-idx-xl p-idx-3 border border-white/60 shadow-sm flex flex-col gap-idx-1">
-          <span className="text-idx-sm font-medium text-secondary/80">Доход</span>
-          <div className="flex items-center gap-idx-0.5 text-idx-xl font-medium text-secondary">
-            <ArrowUp className="w-idx-icon h-idx-icon text-blue-500" />
-            1 452 000₽
+        <div className="flex-1 bg-white/30 backdrop-blur-md rounded-[calc(var(--index)*0.4)] p-[calc(var(--index)*0.5)] border border-white/50 shadow-sm flex flex-col gap-[calc(var(--index)*0.2)]">
+          <span className="text-[#475569] text-[calc(var(--index)*0.45)] font-medium">Доход</span>
+          <div className="flex items-center gap-[calc(var(--index)*0.2)] text-[#1e293b] text-[calc(var(--index)*0.65)] font-medium">
+            <svg className="w-[calc(var(--index)*0.6)] h-[calc(var(--index)*0.6)] text-[#60a5fa]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            {/* Используем periodIncome */}
+            {formatMoney(periodIncome)}
           </div>
         </div>
 
         {/* Карточка Расхода */}
-        <div className="bg-white/50 backdrop-blur-md rounded-idx-xl p-idx-3 border border-white/60 shadow-sm flex flex-col gap-idx-1">
-          <span className="text-idx-sm font-medium text-secondary/80">Расход</span>
-          <div className="flex items-center gap-idx-0.5 text-idx-xl font-medium text-secondary">
-            <ArrowDown className="w-idx-icon h-idx-icon text-purple-500" />
-            987 400₽
+        <div className="flex-1 bg-white/30 backdrop-blur-md rounded-[calc(var(--index)*0.4)] p-[calc(var(--index)*0.5)] border border-white/50 shadow-sm flex flex-col gap-[calc(var(--index)*0.2)]">
+          <span className="text-[#475569] text-[calc(var(--index)*0.45)] font-medium">Расход</span>
+          <div className="flex items-center gap-[calc(var(--index)*0.2)] text-[#1e293b] text-[calc(var(--index)*0.65)] font-medium">
+            <svg className="w-[calc(var(--index)*0.6)] h-[calc(var(--index)*0.6)] text-[#a78bfa]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+            {/* Используем periodExpense */}
+            {formatMoney(periodExpense)}
           </div>
         </div>
       </div>
 
-      {/* ... остальной код без изменений ... */}
-      <div className="bg-white/40 backdrop-blur-md rounded-idx-xl p-idx-3 border border-white/60 shadow-sm flex flex-col gap-idx-2">
-        <div className="flex flex-col gap-idx-0.5">
-          <span className="text-idx-sm font-medium text-secondary/80">Прибыль</span>
-          <span className="text-idx-2xl font-medium text-secondary">464 600₽</span>
+      {/* Блок Прибыли */}
+      <div className="bg-white/30 backdrop-blur-md rounded-[calc(var(--index)*0.4)] p-[calc(var(--index)*0.5)] border border-white/50 shadow-sm flex flex-col gap-[calc(var(--index)*0.4)]">
+        <div className="flex flex-col">
+          <span className="text-[#1e293b] text-[calc(var(--index)*0.45)] font-medium mb-[calc(var(--index)*0.1)]">Прибыль</span>
+          <span className="text-[#1e293b] text-[calc(var(--index)*0.8)] font-medium">
+            {formatMoney(profit)}
+          </span>
         </div>
         
-        <div className="w-full h-[calc(var(--index)*0.5)] bg-white/60 rounded-idx-full overflow-hidden shadow-inner flex">
-          <div className="w-[45%] h-full bg-primary-icon rounded-idx-full"></div>
+        <div className="w-full h-[calc(var(--index)*0.25)] bg-white/60 border border-white/80 rounded-full overflow-hidden flex shadow-inner">
+          <div 
+            className="h-full bg-[#4C5A7A] rounded-full transition-all duration-1000 ease-out"
+            style={{ width: `${profitPercent}%` }}
+          ></div>
         </div>
       </div>
-
     </div>
   );
 };
