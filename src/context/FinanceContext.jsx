@@ -19,6 +19,14 @@ export const FinanceProvider = ({ children }) => {
     setTransactions((prev) => [newTransaction, ...prev]);
   };
 
+  const deleteTransaction = (id) => {
+    setTransactions((prev) => prev.filter(t => t.id !== id))
+  }
+
+  const updateTransaction = (id, updatedData) => {
+    setTransactions((prev) => prev.map(t => (t.id === id ? { ...t, ...updatedData } : t)))
+  }
+
   // 1. ГЛАВНЫЙ БАЛАНС (За всё время)
   const totalIncome = transactions
     .filter(t => t.type === 'income')
@@ -64,7 +72,9 @@ export const FinanceProvider = ({ children }) => {
     // Раздаем period и setPeriod, чтобы другие компоненты могли переключать вкладки
     <FinanceContext.Provider value={{ 
       transactions, 
-      addTransaction, 
+      addTransaction,
+      deleteTransaction,
+      updateTransaction,
       balance, 
       periodIncome, 
       periodExpense,

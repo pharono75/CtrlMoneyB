@@ -50,7 +50,7 @@ const BalanceStats = () => {
         
         <div className="w-full h-[calc(var(--index)*0.25)] bg-white/60 border border-white/80 rounded-full overflow-hidden flex shadow-inner">
           <div 
-            className="h-full bg-[#4C5A7A] rounded-full transition-all duration-1000 ease-out"
+            className="h-full bg-[#4C5A7A] rounded-full transition-all duration-[800ms] ease-[cubic-bezier(0.03,0.74,1,1.01)]"
             style={{ width: `${profitPercent}%` }}
           ></div>
         </div>

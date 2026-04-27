@@ -1,82 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useFinance } from '../../context/FinanceContext';
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '../../constants/categories'; 
 
-const TransactionModal = ({ isOpen, onClose }) => {
-  const { addTransaction } = useFinance();
+const TransactionModal = ({ isOpen, onClose, initialData = null }) => {
+  const { addTransaction, updateTransaction } = useFinance();
+
+  const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
   const [type, setType] = useState('expense');
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('Аренда офиса');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]); 
-  const [counterparty, setCounterparty] = useState('');
+  const [category, setCategory] = useState(EXPENSE_CATEGORIES[0]); 
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [counterparty, setCounterparty] = useState(''); 
   const [fileName, setFileName] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
+
+  const [isInitializing, setIsInitializing] = useState(false);
+
+  useEffect(() => {
+    if (!isInitializing) {
+      setCategory(type === 'expense' ? EXPENSE_CATEGORIES[0] : INCOME_CATEGORIES[0]);
+    }
+  }, [type]);
+
+  useEffect(() => {
+    if (isOpen && initialData) {
+      setIsInitializing(true);
+      
+      setType(initialData.type);
+      setAmount(initialData.amount.toString());
+      setCategory(initialData.category);
+      setDate(initialData.date);
+      setCounterparty(initialData.counterparty || '');
+      setFile(null);
+      setFileName(initialData.fileName || null);
+      
+      setTimeout(() => setIsInitializing(false), 50);
+      
+    } else if (isOpen && !initialData) {
+      setType('expense');
+      setAmount('');
+      setCategory('Прочее');
+      setDate(new Date().toISOString().split('T')[0]);
+      setCounterparty('');
+      setFile(null);
+      setFileName(null);
+    }
+  }, [isOpen, initialData]);
 
   if (!isOpen) return null;
 
   const handleFileUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
+      const uplodedFile = e.target.files[0];
+      setFile(uplodedFile);
+      setFileName(uplodedFile.name);
+      setFilePreview(URL.createObjectURL(uplodedFile));
     }
   };
 
-  // Меняем тип и заодно подставляем правильную категорию по умолчанию
-  const handleTypeChange = (newType) => {
-    setType(newType);
-    setCategory(newType === 'expense' ? 'Аренда офиса' : 'Продажа услуг');
+  const resetAndClose = () => {
+    setAmount('');
+    setCounterparty('');
+    setFileName(null);
+    setFileUrl(null);
+    setFilePreview(null);
+    setFile(null);
+    onClose();
   };
 
-  // 4. ФУНКЦИЯ СОХРАНЕНИЯ
   const handleSave = () => {
-    // Проверяем, ввели ли сумму
     if (!amount || Number(amount) <= 0) {
       alert("Пожалуйста, введите сумму больше нуля");
       return;
     }
 
-    // Собираем всё, что пользователь ввел, в один объект
-    const newTransaction = {
-      id: Date.now().toString(), // Даем уникальный номер
+    const transactionData = {
       type,
-      amount: Number(amount), // Обязательно превращаем текст в число!
+      amount: Number(amount),
       category,
       date,
-      counterparty,
+      counterparty, 
       fileName
     };
 
-    // Отправляем на радиовышку! Она сама сохранит это в localStorage
-    addTransaction(newTransaction);
+    const performSave = (finalFileUrl) => {
+      if (initialData) {
+        updateTransaction(initialData.id, { ...transactionData, fileUrl: finalFileUrl !== undefined ? finalFileUrl : initialData.fileUrl });
+      } else {
+        addTransaction({ id: Date.now().toString(), ...transactionData, fileUrl: finalFileUrl });
+      }
+      resetAndClose();
+    };
 
-    // Очищаем форму для следующего раза
-    setAmount('');
-    setCounterparty('');
-    setFileName(null);
-    
-    // Закрываем модальное окно
-    onClose();
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => performSave(reader.result);
+      reader.readAsDataURL(file);
+    } else {
+      performSave(undefined);
+    }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+  const modalContent = (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
       <div className="bg-[#f8fafc]/90 backdrop-blur-2xl border border-white/80 rounded-[calc(var(--index)*0.8)] p-[calc(var(--index)*1)] w-full max-w-[calc(var(--index)*22)] shadow-2xl relative flex flex-col gap-[calc(var(--index)*0.8)] animate-in fade-in zoom-in duration-200">
         
-        <button onClick={onClose} className="absolute top-[calc(var(--index)*0.8)] right-[calc(var(--index)*0.8)] text-slate-400 hover:text-slate-700 transition-colors cursor-pointer">
+        <button onClick={resetAndClose} className="absolute top-[calc(var(--index)*0.8)] right-[calc(var(--index)*0.8)] text-slate-400 hover:text-slate-700 transition-colors cursor-pointer z-10">
           <svg className="w-[calc(var(--index)*1)] h-[calc(var(--index)*1)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <h2 className="text-[calc(var(--index)*0.8)] font-semibold text-slate-800 tracking-tight">Новая транзакция</h2>
+        <h2 className="text-[calc(var(--index)*0.8)] font-semibold text-slate-800 tracking-tight">
+          {initialData ? 'Редактировать' : 'Новая транзакция'}
+        </h2>
 
         <div className="flex bg-slate-200/50 p-[calc(var(--index)*0.1)] rounded-[calc(var(--index)*0.4)] relative">
           <div 
-            className="absolute top-[calc(var(--index)*0.1)] bottom-[calc(var(--index)*0.1)] w-[calc(50%-var(--index)*0.1)] bg-white rounded-[calc(var(--index)*0.3)] shadow-sm transition-transform duration-300 ease-in-out"
+            className="absolute top-[calc(var(--index)*0.1)] bottom-[calc(var(--index)*0.1)] w-[calc(50%-var(--index)*0.1)] bg-white rounded-[calc(var(--index)*0.3)] shadow-sm transition-transform duration-[400ms] ease-[cubic-bezier(0.03,0.74,1,1.01)]"
             style={{ transform: type === 'income' ? 'translateX(100%)' : 'translateX(0)' }}
           ></div>
           
-          <button onClick={() => handleTypeChange('expense')} className={`flex-1 relative z-10 py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-colors ${type === 'expense' ? 'text-slate-800' : 'text-slate-500'}`}>
+          <button onClick={() => setType('expense')} className={`flex-1 relative z-10 py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-colors duration-[400ms] ${type === 'expense' ? 'text-slate-800' : 'text-slate-500'}`}>
             Расход
           </button>
-          <button onClick={() => handleTypeChange('income')} className={`flex-1 relative z-10 py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-colors ${type === 'income' ? 'text-slate-800' : 'text-slate-500'}`}>
+          <button onClick={() => setType('income')} className={`flex-1 relative z-10 py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-colors duration-[400ms] ${type === 'income' ? 'text-slate-800' : 'text-slate-500'}`}>
             Доход
           </button>
         </div>
@@ -84,40 +134,26 @@ const TransactionModal = ({ isOpen, onClose }) => {
         <div className="grid grid-cols-2 gap-[calc(var(--index)*0.5)]">
           <div className="col-span-2">
             <label className="block text-[calc(var(--index)*0.4)] text-slate-500 font-medium mb-[calc(var(--index)*0.2)]">Сумма (₽)</label>
-            {/* Твоя отличная работа с инпутом! */}
             <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.6)] font-semibold text-slate-800" />
           </div>
 
           <div>
             <label className="block text-[calc(var(--index)*0.4)] text-slate-500 font-medium mb-[calc(var(--index)*0.2)]">Категория</label>
-            <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.5)] text-slate-700 cursor-pointer">
-              {type === 'expense' ? (
-                <>
-                  <option>Аренда офиса</option>
-                  <option>Маркетинг</option>
-                  <option>Зарплатный фонд</option>
-                  <option>Налоги</option>
-                  <option>Прочее</option>
-                </>
-              ) : (
-                <>
-                  <option>Продажа услуг</option>
-                  <option>Инвестиции</option>
-                  <option>Возврат средств</option>
-                  <option>Прочее</option>
-                </>
-              )}
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.45)] text-slate-700 cursor-pointer">
+              {(type === 'expense' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES).map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
             </select>
           </div>
 
           <div>
             <label className="block text-[calc(var(--index)*0.4)] text-slate-500 font-medium mb-[calc(var(--index)*0.2)]">Дата</label>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.5)] text-slate-700 cursor-pointer" />
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.45)] text-slate-700 cursor-pointer" />
           </div>
 
           <div className="col-span-2">
-            <label className="block text-[calc(var(--index)*0.4)] text-slate-500 font-medium mb-[calc(var(--index)*0.2)]">Контрагент (Кому/От кого)</label>
-            <input type="text" value={counterparty} onChange={(e) => setCounterparty(e.target.value)} placeholder="ООО 'Ромашка'" className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.5)] text-slate-700" />
+            <label className="block text-[calc(var(--index)*0.4)] text-slate-500 font-medium mb-[calc(var(--index)*0.2)]">Название транзакции</label>
+            <input type="text" value={counterparty} onChange={(e) => setCounterparty(e.target.value)} placeholder="Например: Зарплата за март" className="w-full bg-white/50 border border-white/80 focus:bg-white focus:border-[#4C5A7A] rounded-[calc(var(--index)*0.4)] px-[calc(var(--index)*0.5)] py-[calc(var(--index)*0.4)] outline-none transition-all text-[calc(var(--index)*0.5)] text-slate-700" />
           </div>
 
           <div className="col-span-2">
@@ -144,12 +180,14 @@ const TransactionModal = ({ isOpen, onClose }) => {
         </div>
 
         <button onClick={handleSave} className="w-full bg-[#4C5A7A] hover:bg-[#3b465e] text-white font-medium py-[calc(var(--index)*0.5)] rounded-[calc(var(--index)*0.4)] transition-colors mt-[calc(var(--index)*0.2)] text-[calc(var(--index)*0.55)] cursor-pointer shadow-md">
-          Сохранить транзакцию
+          {initialData ? 'Сохранить изменения' : 'Сохранить транзакцию'}
         </button>
 
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default TransactionModal;

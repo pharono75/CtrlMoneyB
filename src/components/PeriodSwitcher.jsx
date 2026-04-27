@@ -11,16 +11,25 @@ const PeriodSwitcher = () => {
     { id: 'all', label: 'Все' }
   ];
 
+  const activeIndex = tabs.findIndex(tab => tab.id === period);
+
   return (
-    <div className="flex bg-white/30 backdrop-blur-md border border-white/50 rounded-[calc(var(--index)*0.4)] shadow-sm w-fit mb-[calc(var(--index)*0.5)] overflow-hidden">
+    <div className="relative flex bg-white/30 backdrop-blur-md border border-white/50 rounded-[calc(var(--index)*0.4)] shadow-sm w-full mb-[calc(var(--index)*0.5)] overflow-hidden">
+      
+      <div 
+        className="absolute top-0 bottom-0 left-0 w-1/4 bg-[#4C5A7A] rounded-[calc(var(--index)*0.4)] shadow-md transition-transform duration-[400ms] ease-[cubic-bezier(0.03,0.74,1,1.01)]"
+        style={{ transform: `translateX(${activeIndex * 100}%)` }}
+      ></div>
+
       {tabs.map(tab => (
         <button
           key={tab.id}
           onClick={() => setPeriod(tab.id)}
-          className={`px-[calc(var(--index)*0.8)] py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-all border-r border-white/30 last:border-r-0 ${
+          // 3. Ускорили анимацию смены цвета текста тоже до 400ms
+          className={`flex-1 relative z-10 py-[calc(var(--index)*0.3)] text-[calc(var(--index)*0.45)] font-medium transition-colors duration-[150ms] ${
             period === tab.id 
-              ? 'bg-[#4C5A7A] text-white shadow-md' // Активная кнопка (синяя)
-              : 'text-[#475569] hover:bg-white/40'  // Неактивная кнопка (прозрачная)
+              ? 'text-white' 
+              : 'text-[#475569] hover:text-[#1e293b]'
           }`}
         >
           {tab.label}
