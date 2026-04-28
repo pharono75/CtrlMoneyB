@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import Register from './pages/registration/Register'; 
 import Login from './pages/registration/Login'; 
 import Dashboard from './pages/Dashboard';
+import Finance from './pages/Finance'; // <-- НОВЫЙ ИМПОРТ
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         
-        {/* Закрытый маршрут */}
+        {/* Закрытые маршруты */}
         <Route 
           path="/dashboard" 
           element={
@@ -23,6 +24,17 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        
+        {/* НОВЫЙ МАРШРУТ ФИНАНСОВ */}
+        <Route 
+          path="/finance" 
+          element={
+            <ProtectedRoute>
+              <Finance />
+            </ProtectedRoute>
+          } 
+        />
+
       </Routes>
     </BrowserRouter>
   );

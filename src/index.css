@@ -12,3 +12,11 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+/* Убиваем фокус для всех элементов графиков */
+*:focus,
+.recharts-wrapper,
+.recharts-surface {
+    outline: none !important;
+    box-shadow: none !important;
+}
