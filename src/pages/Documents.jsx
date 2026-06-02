@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Sidebar from '../components/Sidebar';
-import BalanceCard from '../components/BalanceCard';
-import CategoryBudget from '../components/CategoryBudget'; // ИМПОРТ ДОБАВЛЕН
-import FinanceTransactions from '../components/FinanceTransactions';
+import BalanceCard from '../components/BalanceCard'; // БЕРЕМ УЖЕ ГОТОВЫЙ КОМПОНЕНТ ИЗ ПРОЕКТА!
+import DocumentStats from '../components/Documents/DocumentStats';
+import DocumentList from '../components/Documents/DocumentList';
 
-const Finance = () => {
+const Documents = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -17,16 +17,17 @@ const Finance = () => {
 
       <main className="flex-1 grid grid-cols-12 gap-6 h-[calc(100vh-3rem)]">
         
-        {/* ЛЕВАЯ КОЛОНКА (Задержка 100ms) */}
-        {/* Добавили overflow-y-auto, чтобы лимиты можно было скроллить, если их много */}
+        {/* ЛЕВАЯ КОЛОНКА (Баланс + Статистика доков) */}
         <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-6 h-full overflow-y-auto no-scrollbar animate-fade-in-up delay-100 pb-2">
-          <BalanceCard />
-          <CategoryBudget /> {/* РАСКОММЕНТИРОВАНО */}
+          {/* ИСПОЛЬЗУЕМ СУЩЕСТВУЮЩИЙ МОДУЛЬ БАЛАНСА ИЗ ПРОЕКТА */}
+          <BalanceCard /> 
+          {/* НОВЫЙ МОДУЛЬ СТАТИСТИКИ */}
+          <DocumentStats />
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА (Задержка 200ms) */}
+        {/* ПРАВАЯ КОЛОНКА (Список документов) */}
         <div className="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-6 h-full animate-fade-in-up delay-200">
-          <FinanceTransactions />
+          <DocumentList />
         </div>
 
       </main>
@@ -34,4 +35,4 @@ const Finance = () => {
   );
 };
 
-export default Finance;
+export default Documents;

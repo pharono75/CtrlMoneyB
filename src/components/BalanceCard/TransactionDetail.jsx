@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { getCategoryIcon } from "../../constants/categories";
 import { useFinance } from "../../context/FinanceContext";
+import { CloseIcon, ExpandIcon } from "../Common/Icons";
 
 const TransactionDetail = ({ isOpen, onClose, transaction, onEdit }) => {
   const [optimizedUrl, setOptimizedUrl] = useState(null);
@@ -20,6 +21,8 @@ const TransactionDetail = ({ isOpen, onClose, transaction, onEdit }) => {
       } else {
         setOptimizedUrl(transaction.fileUrl);
       }
+    } else {
+      setOptimizedUrl(null); // Сброс состояния, чтобы устранить дублирование файлов
     }
     return () => {
       if (optimizedUrl) URL.revokeObjectURL(optimizedUrl);
@@ -53,9 +56,7 @@ const TransactionDetail = ({ isOpen, onClose, transaction, onEdit }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <button onClick={onClose} className="absolute top-[calc(var(--index)*0.8)] right-[calc(var(--index)*0.8)] text-slate-400 hover:text-slate-700 transition-colors cursor-pointer z-10">
-            <svg className="w-[calc(var(--index)*1)] h-[calc(var(--index)*1)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseIcon className="w-[calc(var(--index)*1)] h-[calc(var(--index)*1)]" />
           </button>
 
           <div className="flex items-center gap-[calc(var(--index)*0.6)]">
@@ -88,9 +89,7 @@ const TransactionDetail = ({ isOpen, onClose, transaction, onEdit }) => {
                   onClick={() => setIsFullscreen(true)}
                   className="text-[calc(var(--index)*0.4)] font-medium text-[#4C5A7A] hover:text-[#3b465e] flex items-center gap-1 transition-colors"
                 >
-                  <svg className="w-[calc(var(--index)*0.6)] h-[calc(var(--index)*0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                  </svg>
+                  <ExpandIcon className="w-[calc(var(--index)*0.6)] h-[calc(var(--index)*0.6)]" />
                   Развернуть
                 </button>
               )}
@@ -132,9 +131,7 @@ const TransactionDetail = ({ isOpen, onClose, transaction, onEdit }) => {
             onClick={() => setIsFullscreen(false)} 
             className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 backdrop-blur-md transition-colors flex items-center gap-2 px-4"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseIcon className="w-5 h-5" />
             <span className="font-medium">Закрыть полноэкранный режим</span>
           </button>
           
