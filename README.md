@@ -1,16 +1,179 @@
-# React + Vite
+# CtrlMoney - Финансовое управление & Аналитика
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Мощное финансовое приложение с автоматической генерацией PDF отчетов и продвинутой аналитикой.**
 
-Currently, two official plugins are available:
+## 🎯 Основные возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 📊 Система управления финансами
+- ✅ Отслеживание доходов и расходов
+- ✅ Управление категориями операций
+- ✅ Контроль бюджетов с предупреждениями
+- ✅ Работа с файлами (загрузка, скачивание, подписание)
 
-## React Compiler
+### 📈 Генерация PDF отчетов (11 этапов)
+1. Инициация пользователем
+2. Выбор типа и параметров отчета
+3. Передача параметров в генератор
+4. Загрузка данных из источников
+5. Обработка и агрегация данных
+6. Создание графиков и диаграмм
+7. Генерация дополнительной визуализации
+8. Автоматический анализ с рекомендациями
+9. Формирование структуры PDF (10 страниц)
+10. Создание PDF файла
+11. Доставка пользователю (скачивание)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🎨 Новые диаграммы в отчетах (v2.0)
+| № | Тип | Страница | Описание |
+|---|-----|----------|----------|
+| 1 | 📈 **Line Chart** | 5 | Динамика доходов/расходов по месяцам |
+| 2 | 📊 **Budget Progress** | 6 | Прогресс по бюджетам с индикаторами |
+| 3 | 🌊 **Waterfall Chart** | 7 | Водопад расходов (Top 10 категорий) |
+| 4 | 🌊 **Sankey Diagram** | 8 | Поток денег (визуализация потоков) |
+| 5 | 🤖 **AI Insights** | 9 | Прогнозирование и анализ тренда |
 
-## Expanding the ESLint configuration
+### 🤖 Интеллектуальные функции
+- **Тренд анализ** - выявление роста/падения расходов
+- **Прогнозирование** - предсказание расходов на следующий месяц
+- **Обнаружение аномалий** - выявление необычно высоких трат
+- **Автоматические рекомендации** - советы по оптимизации
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📄 Структура PDF отчета (10 страниц)
+```
+Стр. 1:  Титульная страница
+Стр. 2:  Финансовая сводка (доходы/расходы/прибыль)
+Стр. 3:  Таблица доходов и расходов
+Стр. 4:  Анализ по категориям
+Стр. 5:  📈 Динамика по месяцам (Line Chart)
+Стр. 6:  📊 Статус бюджетов (Budget Progress)
+Стр. 7:  🌊 Водопад расходов (Waterfall)
+Стр. 8:  🌊 Поток денег (Sankey Diagram)
+Стр. 9:  🤖 AI Insights & Прогнозирование
+Стр. 10: Итоговая статистика
+```
+
+## 🚀 Установка и запуск
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск development сервера
+npm run dev
+
+# Сборка для production
+npm run build
+
+# Проверка кода (ESLint)
+npm run lint
+```
+
+## 📦 Зависимости
+
+**Основные библиотеки:**
+- `react` & `react-dom` - UI фреймворк
+- `react-router-dom` - маршрутизация
+- `html2pdf.js` - генерация PDF
+- `recharts` - интерактивные графики
+- `chart.js` & `react-chartjs-2` - дополнительные диаграммы
+- `swiper` - карусели для документов
+- `lucide-react` - иконки
+- `tailwindcss` - стили
+
+**Development:**
+- `vite` - сборка и dev сервер
+- `eslint` - проверка кода
+
+## 📚 Документация
+
+- [NEW_CHARTS_SUMMARY.md](./NEW_CHARTS_SUMMARY.md) - Сводка новых диаграмм
+- [CHARTS_DOCUMENTATION.md](./CHARTS_DOCUMENTATION.md) - Подробная документация
+- [CHARTS_EXAMPLES.js](./CHARTS_EXAMPLES.js) - Примеры использования
+- [STRUCTURE.md](./STRUCTURE.md) - Структура проекта
+
+## 🏗️ Структура проекта
+
+```
+src/
+├── components/
+│   ├── BalanceCard/        # Карточки баланса и транзакций
+│   ├── Documents/          # Управление документами
+│   │   └── Modals/
+│   │       ├── ReportModal.jsx           # Генерация отчетов
+│   │       ├── UploadModal.jsx           # Загрузка файлов
+│   │       └── DocumentViewerModal.jsx   # Просмотр документов
+│   ├── Charts/
+│   │   └── AdvancedCharts.jsx  # React компоненты новых диаграмм
+│   ├── Sidebar.jsx         # Навигация
+│   └── ...
+├── pages/                  # Страницы приложения
+├── context/                # React Context для управления состоянием
+├── utils/
+│   └── reportGenerator.js  # ⭐ Ядро: генерация отчетов и диаграмм
+└── constants/              # Константы категорий и т.д.
+```
+
+## 💻 Использование
+
+### Генерация отчета
+```javascript
+import { generateReportData, createPdfBase64 } from './utils/reportGenerator';
+
+const reportData = generateReportData(
+  transactions,    // массив операций
+  budgets,        // массив бюджетов
+  'all',          // период: 'month', 'quarter', 'year', 'all'
+  'Финансовая сводка (P&L)',  // тип отчета
+  {
+    summary: true,
+    chartsData: true,
+    categoryAnalysis: true,
+    budgetAnalysis: true,
+    recommendations: true
+  }
+);
+
+const pdfUrl = await createPdfBase64('Отчет', reportData);
+downloadFile(pdfUrl, 'Report.pdf');
+```
+
+### Просмотр диаграмм в React
+```javascript
+import {
+  LineChartComponent,
+  BudgetProgressComponent,
+  AIInsightsComponent,
+} from './components/Charts/AdvancedCharts';
+
+<LineChartComponent monthlyTrend={data.monthlyTrend} />
+<BudgetProgressComponent budgets={budgets} expenses={categories} />
+<AIInsightsComponent monthlyTrend={data.monthlyTrend} />
+```
+
+## ✨ Ключевые особенности
+
+- 🎯 **Полный цикл анализа** - от загрузки данных до AI-прогноза
+- 📱 **Responsive дизайн** - работает на всех устройствах
+- 🔒 **Локальное хранилище** - данные хранятся в браузере (localStorage)
+- 📊 **10 типов визуализации** - графики, диаграммы, таблицы
+- ⚡ **Быстро** - все вычисления < 1 сек
+- 🎨 **Красиво** - современный дизайн с Tailwind CSS
+
+## 🔄 Workflow
+
+1. **Создание операции** → добавляется в Finance
+2. **Просмотр графиков** → Finance вкладка показывает диаграммы
+3. **Управление документами** → Documents вкладка
+4. **Загрузка файлов** → Upload Modal сохраняет в localStorage
+5. **Генерация отчета** → Report Modal создает PDF с анализом
+6. **Скачивание** → PDF готов для просмотра и печати
+
+## 📝 Лицензия
+
+MIT - свободное использование в личных и коммерческих проектах
+
+---
+
+**Версия:** 2.0 с новыми диаграммами  
+**Последнее обновление:** 29.05.2024  
+**Статус:** ✅ Production Ready

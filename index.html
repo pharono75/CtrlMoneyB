@@ -9,7 +9,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <script>
+      // Блокируем мигание цифр и темы до загрузки React!
+      try {
+        const savedSettings = localStorage.getItem('appSettings');
+        // Если зашли первый раз, по дефолту блюр включен (true)
+        const blurBalance = savedSettings ? JSON.parse(savedSettings).blurBalance : true;
+        const darkMode = savedSettings ? JSON.parse(savedSettings).darkMode : false;
+
+        if (blurBalance) document.body.classList.add('hide-amounts');
+        if (darkMode) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

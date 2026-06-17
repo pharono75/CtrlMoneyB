@@ -4,11 +4,21 @@
 const idx = (multiplier) => `calc(var(--index) * ${multiplier})`;
 
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      // Телефоны и вертикальные планшеты
+      'mobile': { 'raw': '(max-width: 1023px), ((max-width: 1366px) and (orientation: portrait))' },
+    },
     extend: {
       colors: {
         'primary': '#767d8f',
