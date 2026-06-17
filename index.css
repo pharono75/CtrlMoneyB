@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --index: calc(1vw + 1vh);
+}
+
+/* Жестко задаем шрифт для всей страницы */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Убиваем фокус для всех элементов графиков */
+*:focus,
+.recharts-wrapper,
+.recharts-surface {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* --- DARK MODE BASE --- */
+html.dark,
+html.dark body,
+html.dark #root {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+/* Перекрашиваем фоновый градиент на экранах входа/регистрации */
+html.dark .bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, #121212, #1c1c1c) !important;
+}
+
+/* Перекрашиваем все SVG иконки через currentColor */
+html.dark svg path,
+html.dark svg g,
+html.dark svg rect,
+html.dark svg circle {
+  fill: currentColor;
+}
+
+/* Исключение для элементов, которые не должны перекрашиваться */
+html.dark .no-recolor path,
+html.dark .no-recolor g,
+html.dark .no-recolor rect,
+html.dark .no-recolor circle {
+  fill: inherit;
+}
+
+/* --- АНИМАЦИЯ ФОНА (ТЕМНАЯ ТЕМА) --- */
+@keyframes diagonalStepDark {
+  0%, 100% { opacity: 0.1; }
+  25%, 50% { opacity: 0.8; }
+}
+
+/* Приглушаем паттерны и меняем анимацию в темной теме */
+html.dark .bg-svg path, 
+html.dark .bg-svg g, 
+html.dark .bg-svg circle,
+html.dark .register-bg path, 
+html.dark .register-bg g, 
+html.dark .register-bg circle {
+  fill: #ffffff;
+animation-name: diagonalStepDark;
+}
+
+/* Инвертируем иконки, где нужно */
+html.dark .login-icon {
+  filter: brightness(0) invert(1);
+}
+
+html.dark {
+--bg-anim-min: 0.02;
+  --bg-anim-max: 0.06;
+}
+
+/* --- MOBILE LAYOUT UTILITIES --- */
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(76, 90, 122, 0.3);
+    border-radius: 9999px;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .pb-safe-nav {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 1023px), ((max-width: 1366px) and (orientation: portrait)) {
+  :root {
+    --index: calc(0.85vw + 0.85vh);
+  }
+}
